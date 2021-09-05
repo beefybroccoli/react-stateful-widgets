@@ -28,7 +28,15 @@ export default function Tic_Tac_Toe(props) {
   const [statePlayerTurn, set_statePlayerTurn] = useState(true);
   const [stateWinner, set_stateWinner] = useState(null);
 
-  const check_for_win_with_points = (input_array) => {
+  /**
+   * check_for_win_with_points function
+   * check if one of the win pattern contains within an array
+   * .....if so return true
+   * .....otherwise return false
+   * @param {*} input_array
+   * @returns
+   */
+  const check_for_winner = (input_array) => {
     let result = false;
     const win_patterns = [
       "123",
@@ -40,7 +48,8 @@ export default function Tic_Tac_Toe(props) {
       "357",
       "159",
     ];
-    if (input_array.length > 2) {
+
+    input_array.length > 2 &&
       win_patterns.forEach((eachPattern) => {
         // console.log("eachPattern = ", eachPattern);
         if (
@@ -48,31 +57,39 @@ export default function Tic_Tac_Toe(props) {
           input_array.includes(eachPattern.charAt(1) + "") &&
           input_array.includes(eachPattern.charAt(2) + "")
         ) {
-          console.log("line 88, match pattern ", eachPattern);
-          console.log("line 89, input_array = ", input_array);
+          // console.log("line 88, match pattern ", eachPattern);
+          // console.log("line 89, input_array = ", input_array);
           result = true;
-        }
+        } //end if block
       });
-    }
 
     //return false by default
     return result;
   };
+  /**
+   * cb_check_for_winner function
+   * check if there is winner after every click
+   * @param {*} stateCircle
+   * @param {*} stateXray
+   */
   const cb_check_for_winner = (stateCircle, stateXray) => {
     //length greater than 2
     if (Array.from(stateCircle).length > 2) {
-      const win_boolean = check_for_win_with_points(stateCircle);
-      console.log("line 101 - win_boolean = ", win_boolean);
+      const win_boolean = check_for_winner(stateCircle);
+      // console.log("line 101 - win_boolean = ", win_boolean);
       win_boolean && set_stateWinner("Circle");
     }
     //length greater than 2
     if (Array.from(stateXray).length > 2) {
-      const win_boolean = check_for_win_with_points(stateXray);
-      console.log("line 107 - win_boolean = ", win_boolean);
+      const win_boolean = check_for_winner(stateXray);
+      // console.log("line 107 - win_boolean = ", win_boolean);
       win_boolean && set_stateWinner("Xray");
     }
   };
 
+  //----------------------------------------------------------------
+  //---------when a click happen update the gameboard state
+  //----------------------------------------------------------------
   if (changedCell) {
     const temp_board_state = stateBoard;
     const index = changedCell.id - 1;
@@ -90,12 +107,17 @@ export default function Tic_Tac_Toe(props) {
 
     //store new sateBoard
     set_stateBoard(temp_board_state);
+
     //reset changedCell to null
     set_changedCell(null);
+
     //flip statePlayerTurn to negate current state
     set_statePlayerTurn(!statePlayerTurn);
   }
 
+  //-------------------------------------------------------------------
+  //-------------------redender the Tic Tac Toe component--------------
+  //-------------------------------------------------------------------
   return (
     <div className="widget-programmers container">
       <div>Whose Turn - {statePlayerTurn ? "Circle" : "Xray"}</div>
@@ -146,6 +168,9 @@ export default function Tic_Tac_Toe(props) {
   );
 }
 
+//----------------------------------------------------------------------------
+//--------------------------------Button component----------------------------
+//----------------------------------------------------------------------------
 function Button(props) {
   const cb_onClick = (event) => {
     if (event.target.innerText === "empty") {
