@@ -17,7 +17,6 @@ render(
     <Input />
     <Squares />
     <Programmers />
-    <Tic_Tac_Toe />
   </>,
   document.querySelector("#root")
 );
