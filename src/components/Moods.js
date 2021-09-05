@@ -28,39 +28,60 @@ STEPS 4, 5, 6:
   Inside these click handlers set the correct mood, using 'setMood' and the variables below the imports.
 */
 
-import React from 'react'; /* STEP 0 */
+import React, { useState } from "react"; /* STEP 0 */
 
-const initialMood = 'Not sure how I feel';
-const happyMood = 'Quite happy!';
-const sadMood = 'Rather sad';
+const initialMood = "Not sure how I feel";
+const happyMood = "Quite happy!";
+const sadMood = "Rather sad";
 
 export default function Moods() {
   /* STEP 1 */
 
+  const [stateMood, set_StateMood] = useState(initialMood);
+
   const makeHappy = () => {
     /* STEP 4 */
+    set_StateMood(happyMood);
   };
   const makeSad = () => {
     /* STEP 5 */
+    set_StateMood(sadMood);
   };
   const reset = () => {
     /* STEP 6 */
+    set_StateMood(initialMood);
   };
 
   const style = {
-    fontSize: '1.5em',
-    marginBottom: '0.3em',
-    color: 'crimson', /* STEP 2 */
+    fontSize: "1.5em",
+    marginBottom: "0.3em",
+    color: initialMood === happyMood ? "royalblue" : "crimson",
+    /* 
+    STEP 2 
+    Make the color of the text be royalblue if the state of the mood is happy, crimson otherwise.
+    */
   };
 
   return (
-    <div className='widget-moods container'>
+    <div className="widget-moods container">
       <h2>Moods</h2>
-      <div id='mood' style={style}>Not sure how I feel</div> {/* STEP 3 */}
+      <div id="mood" style={style}>
+        {stateMood}
+      </div>{" "}
+      {/* 
+        STEP 3 
+        Remove the hard-coded mood and interpolate the 'mood' slice of state instead, using curly brackets.
+      */}
       <div>
-        <button id='makeHappy' onClick={makeHappy}>Make Happy</button>
-        <button id='makeSad' onClick={makeSad}>Make Sad</button>
-        <button id='resetMood' onClick={reset}>Reset</button>
+        <button id="makeHappy" onClick={makeHappy}>
+          Make Happy
+        </button>
+        <button id="makeSad" onClick={makeSad}>
+          Make Sad
+        </button>
+        <button id="resetMood" onClick={reset}>
+          Reset
+        </button>
       </div>
     </div>
   );
