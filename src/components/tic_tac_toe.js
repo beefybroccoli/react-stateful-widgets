@@ -36,7 +36,7 @@ export default function Tic_Tac_Toe(props) {
    * @param {*} input_array
    * @returns
    */
-  const check_for_winner = (input_array) => {
+  const helper_check_for_winner = (input_array) => {
     let result = false;
     const win_patterns = [
       "123",
@@ -65,7 +65,7 @@ export default function Tic_Tac_Toe(props) {
 
     //return false by default
     return result;
-  };
+  }; //end helper_check_for_winner function
   /**
    * cb_check_for_winner function
    * check if there is winner after every click
@@ -75,17 +75,17 @@ export default function Tic_Tac_Toe(props) {
   const cb_check_for_winner = (stateCircle, stateXray) => {
     //length greater than 2
     if (Array.from(stateCircle).length > 2) {
-      const win_boolean = check_for_winner(stateCircle);
+      const win_boolean = helper_check_for_winner(stateCircle);
       // console.log("line 101 - win_boolean = ", win_boolean);
       win_boolean && set_stateWinner("Circle");
     }
     //length greater than 2
     if (Array.from(stateXray).length > 2) {
-      const win_boolean = check_for_winner(stateXray);
+      const win_boolean = helper_check_for_winner(stateXray);
       // console.log("line 107 - win_boolean = ", win_boolean);
       win_boolean && set_stateWinner("Xray");
     }
-  };
+  }; //end cb_check_for_winner function
 
   //----------------------------------------------------------------
   //---------when a click happen update the gameboard state
@@ -116,7 +116,7 @@ export default function Tic_Tac_Toe(props) {
 
     //flip statePlayerTurn to negate current state
     set_statePlayerTurn(!statePlayerTurn);
-  }
+  } //end if block
 
   //-------------------------------------------------------------------
   //-------------------render the Tic Tac Toe component--------------
@@ -168,8 +168,8 @@ export default function Tic_Tac_Toe(props) {
       </div>
       <p>{stateWinner ? `The winner is ${stateWinner}` : "no winner yet"}</p>
     </div>
-  );
-}
+  ); //end return statement
+} //end Tic_Tac_Toe Component
 
 //----------------------------------------------------------------------------
 //--------------------------------Button component----------------------------
@@ -181,7 +181,7 @@ function Button(props) {
       // console.log(event.target.id, " clicked");
       props.input_cb_set_changedCell({ id: event.target.id, state: "clicked" });
     }
-  };
+  }; //end cb_onClick
 
   return (
     <>
@@ -189,5 +189,5 @@ function Button(props) {
         {props.input_object.state}
       </button>
     </>
-  );
-}
+  ); //end return block
+} //end Button component
