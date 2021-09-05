@@ -11,13 +11,13 @@ import Tic_Tac_Toe from "./components/tic_tac_toe";
 
 render(
   <>
-    <Tic_Tac_Toe />
     <Counter />
     <Moods />
     <Spinner />
     <Input />
     <Squares />
     <Programmers />
+
   </>,
   document.querySelector("#root")
 );
