@@ -26,16 +26,67 @@ export default function Tic_Tac_Toe(props) {
   const [stateCircle, set_stateCircle] = useState([]);
   const [stateXray, set_stateXray] = useState([]);
   const [statePlayerTurn, set_statePlayerTurn] = useState(true);
+  const [stateWinner, set_stateWinner] = useState(null);
+
+  const check_for_win_with_points = (input_array) => {
+    let result = false;
+    const win_patterns = [
+      "123",
+      "456",
+      "789",
+      "147",
+      "258",
+      "369",
+      "357",
+      "159",
+    ];
+    if (input_array.length > 2) {
+      win_patterns.forEach((eachPattern) => {
+        // console.log("eachPattern = ", eachPattern);
+        if (
+          input_array.includes(eachPattern.charAt(0) + "") &&
+          input_array.includes(eachPattern.charAt(1) + "") &&
+          input_array.includes(eachPattern.charAt(2) + "")
+        ) {
+          console.log("line 88, match pattern ", eachPattern);
+          console.log("line 89, input_array = ", input_array);
+          result = true;
+        }
+      });
+    }
+
+    //return false by default
+    return result;
+  };
+  const cb_check_for_winner = (stateCircle, stateXray) => {
+    //length greater than 2
+    if (Array.from(stateCircle).length > 2) {
+      const win_boolean = check_for_win_with_points(stateCircle);
+      console.log("line 101 - win_boolean = ", win_boolean);
+      win_boolean && set_stateWinner("Circle");
+    }
+    //length greater than 2
+    if (Array.from(stateXray).length > 2) {
+      const win_boolean = check_for_win_with_points(stateXray);
+      console.log("line 107 - win_boolean = ", win_boolean);
+      win_boolean && set_stateWinner("Xray");
+    }
+  };
 
   if (changedCell) {
     const temp_board_state = stateBoard;
     const index = changedCell.id - 1;
-    console.log("index = ", index);
+    // console.log("index = ", index);
     if (statePlayerTurn) {
       temp_board_state[index].state = "Circle";
+      set_stateCircle([...stateCircle, changedCell.id]);
     } else {
       temp_board_state[index].state = "X-ray";
+      set_stateXray([...stateXray, changedCell.id]);
     }
+
+    //check for winner
+    cb_check_for_winner(stateCircle, stateXray);
 
     //store new sateBoard
     set_stateBoard(temp_board_state);
@@ -90,6 +141,7 @@ export default function Tic_Tac_Toe(props) {
           input_cb_set_changedCell={set_changedCell}
         />
       </div>
+      <p>{stateWinner ? `The winner is ${stateWinner}` : "no winner yet"}</p>
     </div>
   );
 }
