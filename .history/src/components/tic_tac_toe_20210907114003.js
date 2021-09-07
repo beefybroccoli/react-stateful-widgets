@@ -169,7 +169,7 @@ export default function Tic_Tac_Toe(props) {
   //-------------------------------------------------------------------
   return (
     <div className="widget-programmers container">
-      <h2>Tic-Tac-Toe</h2>
+      <h2>Tic</h2>
       <div>Whose Turn - {statePlayerTurn ? "Circle" : "Xray"}</div>
       <div>
         <Button
