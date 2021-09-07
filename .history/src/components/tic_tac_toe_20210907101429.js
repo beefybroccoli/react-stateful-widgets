@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled from "react-styled";
 /*
 #### Stretch Goal 2 (Tic-Tac-Toe)
 
@@ -73,23 +73,6 @@ export default function Tic_Tac_Toe(props) {
    * @param {*} stateCircle
    * @param {*} stateXray
    */
-
-  const cb_onClick_Reset = () => {
-    /*
-      const [stateBoard, set_stateBoard] = useState(initial_board);
-      const [changedCell, set_changedCell] = useState(null);
-      const [stateCircle, set_stateCircle] = useState([]);
-      const [stateXray, set_stateXray] = useState([]);
-      const [statePlayerTurn, set_statePlayerTurn] = useState(true);
-      const [stateWinner, set_stateWinner] = useState(null);
-    */
-    set_stateBoard(initial_board);
-    set_changedCell(null);
-    set_stateCircle([]);
-    set_stateXray([]);
-    set_statePlayerTurn(true);
-    set_stateWinner(null);
-  };
   const cb_check_for_winner = () => {
     //length greater than 2
     if (Array.from(stateCircle).length > 2) {
@@ -146,7 +129,7 @@ export default function Tic_Tac_Toe(props) {
   }, [changedCell]);
 
   const DIV_SHOW_HIDE = styled.div`
-    display: ${stateWinner ? "block" : "none"};
+
   `;
 
   //-------------------------------------------------------------------
@@ -198,9 +181,6 @@ export default function Tic_Tac_Toe(props) {
         />
       </div>
       <p>{stateWinner ? `The winner is ${stateWinner}` : "no winner yet"}</p>
-      <DIV_SHOW_HIDE>
-        <button onClick={cb_onClick_Reset}>Reset</button>
-      </DIV_SHOW_HIDE>
     </div>
   ); //end return statement
 } //end Tic_Tac_Toe Component

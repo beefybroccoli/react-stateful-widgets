@@ -199,7 +199,9 @@ export default function Tic_Tac_Toe(props) {
       </div>
       <p>{stateWinner ? `The winner is ${stateWinner}` : "no winner yet"}</p>
       <DIV_SHOW_HIDE>
-        <button onClick={cb_onClick_Reset}>Reset</button>
+        <button onClick={cb_onClick_Reset}>
+          <h1>Reset</h1>
+        </button>
       </DIV_SHOW_HIDE>
     </div>
   ); //end return statement
