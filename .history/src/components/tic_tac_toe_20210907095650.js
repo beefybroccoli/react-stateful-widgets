@@ -82,7 +82,7 @@ export default function Tic_Tac_Toe(props) {
       "Array.from(stateXray).length =  ",
       Array.from(stateXray).length
     );
-    console.log("stateBoard = ", stateBoard);
+    console.log(stateBoard)
     //length greater than 2
     if (Array.from(stateCircle).length > 2) {
       const win_boolean = helper_check_for_winner(stateCircle);
@@ -108,16 +108,10 @@ export default function Tic_Tac_Toe(props) {
       // console.log("index = ", index);
       if (statePlayerTurn) {
         temp_board_state[index].state = "Circle";
-        const temp_array = stateCircle;
-        temp_array.push(changedCell.id);
-        set_stateCircle(temp_array);
-        // set_stateCircle([...stateCircle, changedCell.id]);
+        set_stateCircle([...stateCircle, changedCell.id]);
       } else {
         temp_board_state[index].state = "X-ray";
-        const temp_array = stateXray;
-        temp_array.push(changedCell.id);
-        set_stateXray(temp_array);
-        // set_stateXray([...stateXray, changedCell.id]);
+        set_stateXray([...stateXray, changedCell.id]);
       }
 
       //store new sateBoard

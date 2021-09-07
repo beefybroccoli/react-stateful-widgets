@@ -114,10 +114,7 @@ export default function Tic_Tac_Toe(props) {
         // set_stateCircle([...stateCircle, changedCell.id]);
       } else {
         temp_board_state[index].state = "X-ray";
-        const temp_array = stateXray;
-        temp_array.push(changedCell.id);
-        set_stateXray(temp_array);
-        // set_stateXray([...stateXray, changedCell.id]);
+        set_stateXray([...stateXray, changedCell.id]);
       }
 
       //store new sateBoard

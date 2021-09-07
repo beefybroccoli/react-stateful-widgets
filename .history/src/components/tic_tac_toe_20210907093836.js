@@ -72,17 +72,16 @@ export default function Tic_Tac_Toe(props) {
    * @param {*} stateCircle
    * @param {*} stateXray
    */
-  const cb_check_for_winner = () => {
+  const cb_check_for_winner = (stateCircle, stateXray) => {
     console.log("run cb_check_for_winner");
     console.log(
-      "Array.from(stateCircle).length = ",
+      "(Array.from(stateCircle).length = ",
       Array.from(stateCircle).length
     );
     console.log(
       "Array.from(stateXray).length =  ",
       Array.from(stateXray).length
     );
-    console.log("stateBoard = ", stateBoard);
     //length greater than 2
     if (Array.from(stateCircle).length > 2) {
       const win_boolean = helper_check_for_winner(stateCircle);
@@ -108,26 +107,19 @@ export default function Tic_Tac_Toe(props) {
       // console.log("index = ", index);
       if (statePlayerTurn) {
         temp_board_state[index].state = "Circle";
-        const temp_array = stateCircle;
-        temp_array.push(changedCell.id);
-        set_stateCircle(temp_array);
-        // set_stateCircle([...stateCircle, changedCell.id]);
+        set_stateCircle([...stateCircle, changedCell.id]);
       } else {
         temp_board_state[index].state = "X-ray";
-        const temp_array = stateXray;
-        temp_array.push(changedCell.id);
-        set_stateXray(temp_array);
-        // set_stateXray([...stateXray, changedCell.id]);
+        set_stateXray([...stateXray, changedCell.id]);
       }
-
-      //store new sateBoard
-      set_stateBoard(temp_board_state);
 
       //????????????????????????????????????????????????????????????????
       //???????? Why there was a dealy executing cb_check_for_winner ???
       //check for winner                            //??????????????????
-      cb_check_for_winner(); //??????????????????
+      cb_check_for_winner(stateCircle, stateXray); //??????????????????
       //????????????????????????????????????????????????????????????????
+
+      
 
       //reset changedCell to null
       set_changedCell(null);

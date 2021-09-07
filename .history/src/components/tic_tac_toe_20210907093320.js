@@ -72,17 +72,7 @@ export default function Tic_Tac_Toe(props) {
    * @param {*} stateCircle
    * @param {*} stateXray
    */
-  const cb_check_for_winner = () => {
-    console.log("run cb_check_for_winner");
-    console.log(
-      "Array.from(stateCircle).length = ",
-      Array.from(stateCircle).length
-    );
-    console.log(
-      "Array.from(stateXray).length =  ",
-      Array.from(stateXray).length
-    );
-    console.log("stateBoard = ", stateBoard);
+  const cb_check_for_winner = (stateCircle, stateXray) => {
     //length greater than 2
     if (Array.from(stateCircle).length > 2) {
       const win_boolean = helper_check_for_winner(stateCircle);
@@ -97,45 +87,40 @@ export default function Tic_Tac_Toe(props) {
     }
   }; //end cb_check_for_winner function
 
-  useEffect(() => {
-    //----------------------------------------------------------------
-    //---------when a click happen update the gameboard state
-    //----------------------------------------------------------------
+  //----------------------------------------------------------------
+  //---------when a click happen update the gameboard state
+  //----------------------------------------------------------------
+  if (changedCell) {
+    const temp_board_state = stateBoard;
+    const index = changedCell.id - 1;
+    // console.log("index = ", index);
+    if (statePlayerTurn) {
+      temp_board_state[index].state = "Circle";
+      set_stateCircle([...stateCircle, changedCell.id]);
+    } else {
+      temp_board_state[index].state = "X-ray";
+      set_stateXray([...stateXray, changedCell.id]);
+    }
 
-    if (changedCell) {
-      const temp_board_state = stateBoard;
-      const index = changedCell.id - 1;
-      // console.log("index = ", index);
-      if (statePlayerTurn) {
-        temp_board_state[index].state = "Circle";
-        const temp_array = stateCircle;
-        temp_array.push(changedCell.id);
-        set_stateCircle(temp_array);
-        // set_stateCircle([...stateCircle, changedCell.id]);
-      } else {
-        temp_board_state[index].state = "X-ray";
-        const temp_array = stateXray;
-        temp_array.push(changedCell.id);
-        set_stateXray(temp_array);
-        // set_stateXray([...stateXray, changedCell.id]);
-      }
+    //????????????????????????????????????????????????????????????????
+    //???????? Why there was a dealy executing cb_check_for_winner ???
+    //check for winner                            //??????????????????
+    cb_check_for_winner(stateCircle, stateXray); //??????????????????
+    //????????????????????????????????????????????????????????????????
 
-      //store new sateBoard
-      set_stateBoard(temp_board_state);
+    //store new sateBoard
+    set_stateBoard(temp_board_state);
 
-      //????????????????????????????????????????????????????????????????
-      //???????? Why there was a dealy executing cb_check_for_winner ???
-      //check for winner                            //??????????????????
-      cb_check_for_winner(); //??????????????????
-      //????????????????????????????????????????????????????????????????
+    //reset changedCell to null
+    set_changedCell(null);
 
-      //reset changedCell to null
-      set_changedCell(null);
+    //flip statePlayerTurn to negate current state
+    set_statePlayerTurn(!statePlayerTurn);
+  } //end if block
 
-      //flip statePlayerTurn to negate current state
-      set_statePlayerTurn(!statePlayerTurn);
-    } //end if block
-  }, [changedCell]);
+  useEffect(()=>{
+
+  },[changedCell])
 
   //-------------------------------------------------------------------
   //-------------------render the Tic Tac Toe component--------------

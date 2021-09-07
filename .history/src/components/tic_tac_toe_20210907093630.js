@@ -72,17 +72,8 @@ export default function Tic_Tac_Toe(props) {
    * @param {*} stateCircle
    * @param {*} stateXray
    */
-  const cb_check_for_winner = () => {
-    console.log("run cb_check_for_winner");
-    console.log(
-      "Array.from(stateCircle).length = ",
-      Array.from(stateCircle).length
-    );
-    console.log(
-      "Array.from(stateXray).length =  ",
-      Array.from(stateXray).length
-    );
-    console.log("stateBoard = ", stateBoard);
+  const cb_check_for_winner = (stateCircle, stateXray) => {
+    console.log("run line 95");
     //length greater than 2
     if (Array.from(stateCircle).length > 2) {
       const win_boolean = helper_check_for_winner(stateCircle);
@@ -102,32 +93,28 @@ export default function Tic_Tac_Toe(props) {
     //---------when a click happen update the gameboard state
     //----------------------------------------------------------------
 
+   
+
     if (changedCell) {
       const temp_board_state = stateBoard;
       const index = changedCell.id - 1;
       // console.log("index = ", index);
       if (statePlayerTurn) {
         temp_board_state[index].state = "Circle";
-        const temp_array = stateCircle;
-        temp_array.push(changedCell.id);
-        set_stateCircle(temp_array);
-        // set_stateCircle([...stateCircle, changedCell.id]);
+        set_stateCircle([...stateCircle, changedCell.id]);
       } else {
         temp_board_state[index].state = "X-ray";
-        const temp_array = stateXray;
-        temp_array.push(changedCell.id);
-        set_stateXray(temp_array);
-        // set_stateXray([...stateXray, changedCell.id]);
+        set_stateXray([...stateXray, changedCell.id]);
       }
-
-      //store new sateBoard
-      set_stateBoard(temp_board_state);
 
       //????????????????????????????????????????????????????????????????
       //???????? Why there was a dealy executing cb_check_for_winner ???
       //check for winner                            //??????????????????
-      cb_check_for_winner(); //??????????????????
+      cb_check_for_winner(stateCircle, stateXray); //??????????????????
       //????????????????????????????????????????????????????????????????
+
+      //store new sateBoard
+      set_stateBoard(temp_board_state);
 
       //reset changedCell to null
       set_changedCell(null);

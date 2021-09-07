@@ -117,7 +117,7 @@ export default function Tic_Tac_Toe(props) {
         const temp_array = stateXray;
         temp_array.push(changedCell.id);
         set_stateXray(temp_array);
-        // set_stateXray([...stateXray, changedCell.id]);
+        set_stateXray([...stateXray, changedCell.id]);
       }
 
       //store new sateBoard
