@@ -91,14 +91,6 @@ export default function Tic_Tac_Toe(props) {
     set_stateWinner(null);
   };
   const cb_check_for_winner = () => {
-    console.log(
-      "Array.from(stateCircle).length = ",
-      Array.from(stateCircle).length
-    );
-    console.log(
-      "Array.from(stateXray).length =  ",
-      Array.from(stateXray).length
-    );
     //length greater than 2
     if (Array.from(stateCircle).length > 2) {
       const win_boolean = helper_check_for_winner(stateCircle);
