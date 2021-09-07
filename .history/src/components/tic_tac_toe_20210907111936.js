@@ -105,6 +105,7 @@ export default function Tic_Tac_Toe(props) {
     }
   }; //end cb_check_for_winner function
 
+  // useEffect(() => {
   //----------------------------------------------------------------
   //---------when a click happen update the gameboard state
   //----------------------------------------------------------------
@@ -142,6 +143,7 @@ export default function Tic_Tac_Toe(props) {
     //flip statePlayerTurn to negate current state
     set_statePlayerTurn(!statePlayerTurn);
   } //end if block
+
 
   const DIV_SHOW_HIDE = styled.div`
     display: ${stateWinner ? "block" : "none"};
