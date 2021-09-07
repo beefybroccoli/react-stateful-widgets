@@ -57,8 +57,8 @@ export default function Tic_Tac_Toe(props) {
           input_array.includes(eachPattern.charAt(1) + "") &&
           input_array.includes(eachPattern.charAt(2) + "")
         ) {
-          // console.log("line 88, match pattern ", eachPattern);
-          // console.log("line 89, input_array = ", input_array);
+          console.log("line 88, match pattern ", eachPattern);
+          console.log("line 89, input_array = ", input_array);
           result = true;
         } //end if block
       });
@@ -73,7 +73,7 @@ export default function Tic_Tac_Toe(props) {
    * @param {*} stateXray
    */
   const cb_check_for_winner = () => {
-    //length greater than 2
+      //length greater than 2
     if (Array.from(stateCircle).length > 2) {
       const win_boolean = helper_check_for_winner(stateCircle);
       // console.log("line 101 - win_boolean = ", win_boolean);

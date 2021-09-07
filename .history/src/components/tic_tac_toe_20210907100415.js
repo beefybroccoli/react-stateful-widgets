@@ -57,8 +57,8 @@ export default function Tic_Tac_Toe(props) {
           input_array.includes(eachPattern.charAt(1) + "") &&
           input_array.includes(eachPattern.charAt(2) + "")
         ) {
-          // console.log("line 88, match pattern ", eachPattern);
-          // console.log("line 89, input_array = ", input_array);
+          console.log("line 88, match pattern ", eachPattern);
+          console.log("line 89, input_array = ", input_array);
           result = true;
         } //end if block
       });
