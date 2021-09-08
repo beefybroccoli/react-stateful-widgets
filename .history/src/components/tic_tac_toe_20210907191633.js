@@ -122,11 +122,14 @@ export default function Tic_Tac_Toe(props) {
     //update stateCircle
 
     const myPromise = new Promise((cb_check_for_winner, reject) => {
-      //update stateCircle
-      statePlayerTurn && set_stateCircle([...stateCircle, changedCell.id]);
-
+      if (statePlayerTurn) {
+  
+        set_stateCircle([...stateCircle, changedCell.id]);
+      }
       //update stateXray
-      !statePlayerTurn && set_stateXray([...stateXray, changedCell.id]);
+      else if (!statePlayerTurn) {
+        set_stateXray([...stateXray, changedCell.id]);
+      }
     });
 
     //store new sateBoard
