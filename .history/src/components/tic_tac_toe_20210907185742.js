@@ -153,7 +153,7 @@ export default function Tic_Tac_Toe(props) {
       }
     });
 
-    myPromise.then(cb_check_for_winner);
+    myPromise.then(cb_check_for_winner, null);
 
     //store new sateBoard
     const temp_board_state = stateBoard;
